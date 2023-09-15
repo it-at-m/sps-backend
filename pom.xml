@@ -27,7 +27,7 @@
         <spring.boot.version>3.0.7</spring.boot.version>
         <spring.cloud.version>2022.0.3</spring.cloud.version>
         <logstash.encoder>7.0.1</logstash.encoder>
-        <ojdbc8.version>12.2.0.1.0</ojdbc8.version>
+        <ojdbc8.version>19.17.0.0</ojdbc8.version>
         <apache.commons.collections4>4.4</apache.commons.collections4>
         <apache.commons.csv>1.9.0</apache.commons.csv>
         <apache.commons.io>2.11.0</apache.commons.io>
@@ -160,8 +160,8 @@
         </dependency>
         <dependency>
             <groupId>com.oracle</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>${ojdbc8.version}</version>
+            <artifactId>ojdbc10</artifactId>
+            <version>${ojdbc10.version}</version>
         </dependency>
 
         <!-- Other -->
