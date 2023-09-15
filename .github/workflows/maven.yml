@@ -9,10 +9,7 @@
 name: Java CI with Maven
 
 on:
-  push:
-    branches: [ "david-pipeline" ]
-  pull_request:
-    branches: [ "david-pipeline" ]
+  push
 
 jobs:
   build:
