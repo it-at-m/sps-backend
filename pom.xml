@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
+<!--
     <parent>
         <groupId>de.muenchen</groupId>
         <artifactId>muenchen-pom</artifactId>
         <version>2.1.0</version>
     </parent>
-
+-->
 
     <groupId>de.muenchen.beispielprojekt</groupId>
     <artifactId>beispielprojekt-backend</artifactId>
@@ -27,7 +27,7 @@
         <spring.boot.version>3.0.7</spring.boot.version>
         <spring.cloud.version>2022.0.3</spring.cloud.version>
         <logstash.encoder>7.0.1</logstash.encoder>
-        <ojdbc8.version>12.2.0.1.0</ojdbc8.version>
+        <ojdbc10.version>19.17.0.0</ojdbc10.version>
         <apache.commons.collections4>4.4</apache.commons.collections4>
         <apache.commons.csv>1.9.0</apache.commons.csv>
         <apache.commons.io>2.11.0</apache.commons.io>
@@ -159,9 +159,9 @@
             <artifactId>hibernate-jpamodelgen</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>${ojdbc8.version}</version>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc10</artifactId>
+            <version>${ojdbc10.version}</version>
         </dependency>
 
         <!-- Other -->
