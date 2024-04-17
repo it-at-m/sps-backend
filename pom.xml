@@ -275,8 +275,8 @@
 
 
     <scm>
-        <connection>scm:git:https://git.muenchen.de/GITLAB_GROUP/GITLAB_REPOSITORY.git</connection>
-        <developerConnection>scm:git:https://git.muenchen.de/GITLAB_GROUP/GITLAB_REPOSITORY.git</developerConnection>
+        <connection>scm:git:${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git</connection>
+        <developerConnection>scm:git:${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git</developerConnection>
     </scm>
 
 
