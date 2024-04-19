@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
 <!--
@@ -14,7 +12,7 @@
 
     <groupId>de.muenchen.beispielprojekt</groupId>
     <artifactId>beispielprojekt-backend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.10</version>
     <name>beispielprojekt_backend</name>
 
 
@@ -277,7 +275,8 @@
     <scm>
         <connection>scm:git:${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git</connection>
         <developerConnection>scm:git:${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git</developerConnection>
-    </scm>
+      <tag>beispielprojekt-backend-1.0.10</tag>
+  </scm>
 
 
     <build>
@@ -381,8 +380,8 @@
                         <eclipse>
                             <file>eclipse-formatter.xml</file>
                         </eclipse>
-                        <trimTrailingWhitespace/>
-                        <endWithNewline/>
+                        <trimTrailingWhitespace />
+                        <endWithNewline />
                     </java>
                 </configuration>
             </plugin>
