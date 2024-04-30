@@ -1,14 +1,25 @@
 name: Compliance check and build test
 
+
+env:
+     JAVA_VERSION: 17
+     NODE_VERSION: 20
+     APP_PATH: .
+     TZ: Europe/Berlin # timezone
+     
 on: # defining on which triggers this action should run
   push:
     branches:
       # define on push of which branches should this action be run
     paths:
       # define the concrete paths on which a change triggers this action, e.g. backend/**
+
+     - " ${{env.APP_PATH}}/**"
   pull_request: # trigger this action also on Pull Requests
     types: [ opened, reopened ]
 
+
+     
 jobs:
   compliance:
     runs-on: ubuntu-latest
@@ -28,11 +39,7 @@ jobs:
   build-maven:
     needs: compliance
     runs-on: ubuntu-latest
-    env:
-     JAVA_VERSION: 17
-     NODE_VERSION: 20
-     APP_PATH: .
-     TZ: Europe/Berlin # timezone
+
 
     steps:
       - uses: actions/checkout@v4
