@@ -9,8 +9,17 @@ env:
 jobs:
   greeting_job:
     runs-on: ubuntu-latest
+    environment: production
     env:
       Greeting: Hello
+    steps:
+      - name: "Say Hello Mona it's Monday"
+        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+        env:
+          First_Name: Mona
+  abc:
+    runs-on: ubuntu-latest
+    environment: production1
     steps:
       - name: "Say Hello Mona it's Monday"
         run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
