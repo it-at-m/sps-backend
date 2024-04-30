@@ -50,4 +50,4 @@ jobs:
         with:
           node-version:  ${{ env.NODE_VERSION }}
       - name: Build with Maven
-        run: echo "$TZ" && mvn --update-snapshots -f .${{env.APP_PATH}}/pom.xml install
+        run: echo "$TZ" && mvn --update-snapshots -f ${{env.APP_PATH}}/pom.xml install
