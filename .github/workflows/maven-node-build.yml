@@ -31,7 +31,7 @@ jobs:
     env:
      JAVA_VERSION: 17
      NODE_VERSION: 20
-     PATH: .
+     APP_PATH: .
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 
@@ -45,4 +45,4 @@ jobs:
         with:
           node-version:  ${{ env.NODE_VERSION }}
       - name: Build with Maven
-        run: mvn --update-snapshots -f ${env.PATH}/pom.xml install
+        run: mvn --update-snapshots -f ${{env.APP_PATH}}/pom.xml install
