@@ -36,3 +36,9 @@ jobs:
            mvn release:prepare  -B  -Dpassword=${GITLAB_ACCESS_TOKEN_PW}  -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
         env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v4
+        with:
+         name: target
+         path: "**/target"
+         retention-days: 5           
