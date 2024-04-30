@@ -4,7 +4,7 @@ name: Compliance check and build test
 env:
      JAVA_VERSION: 17
      NODE_VERSION: 20
-     APP_PATH: "" # example /backend/ for monorepos
+     APP_PATH: "**" # example /backend/ for monorepos
      TZ: Europe/Berlin # timezone
      
 on: # defining on which triggers this action should run
@@ -14,7 +14,7 @@ on: # defining on which triggers this action should run
     paths:
       # define the concrete paths on which a change triggers this action, e.g. backend/**
 
-     - "**"
+     - "${{env.APP_PATH}}"
   pull_request: # trigger this action also on Pull Requests
     types: [ opened, reopened ]
 
