@@ -4,7 +4,7 @@ name: Compliance check and build test
 env:
      JAVA_VERSION: 17
      NODE_VERSION: 20
-     APP_PATH: "**" # example /backend/ for monorepos
+     APP_PATH: "." # example ./backend for monorepos
      TZ: Europe/Berlin # timezone
      
 on: # defining on which triggers this action should run
@@ -12,13 +12,9 @@ on: # defining on which triggers this action should run
     branches:
       # define on push of which branches should this action be run
     paths:
-      # define the concrete paths on which a change triggers this action, e.g. backend/**
-
-     - '${{ env.APP_PATH }}'
+     - '**'     # define the concrete paths on which a change triggers this action, e.g. backend/**
   pull_request: # trigger this action also on Pull Requests
     types: [ opened, reopened ]
-
-
      
 jobs:
   compliance:
@@ -54,4 +50,4 @@ jobs:
         with:
           node-version:  ${{ env.NODE_VERSION }}
       - name: Build with Maven
-        run: echo "$TZ" && mvn --update-snapshots -f .${{env.APP_PATH}}pom.xml install
+        run: echo "$TZ" && mvn --update-snapshots -f .${{env.APP_PATH}}/pom.xml install
