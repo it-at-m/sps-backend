@@ -6,7 +6,12 @@ env:
      NODE_VERSION: 20
      APP_PATH: "." # example ./backend for monorepos
      TZ: Europe/Berlin # timezone
-     
+       # Use docker.io for Docker Hub if empty
+     REGISTRY: ghcr.io
+     # github.repository as <account>/<repo>
+     IMAGE_NAME: ${{ github.repository }}
+
+  
 on: # defining on which triggers this action should run
   push:
     branches:
