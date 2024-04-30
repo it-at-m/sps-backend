@@ -35,8 +35,6 @@ jobs:
   build-maven:
     needs: compliance
     runs-on: ubuntu-latest
-
-
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 
@@ -56,4 +54,32 @@ jobs:
         with:
          name: target
          path: "**/target"
-         retention-days: 5     
+         retention-days: 5    
+  build-image:
+     needs: build-maven
+     runs-on: ubuntu-latest
+     steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v4
+        with:
+           name: target
+      - name: Login to Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+
+      - name: Build and push image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
