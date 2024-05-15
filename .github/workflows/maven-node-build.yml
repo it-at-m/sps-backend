@@ -15,7 +15,7 @@ env:
   
 on: # defining on which triggers this action should run
   push:
-    # branches:
+     branches:
       # define on push of which branches should this action be run
      paths:
      - "**"
