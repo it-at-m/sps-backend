@@ -19,7 +19,7 @@ on: # defining on which triggers this action should run
       # define on push of which branches should this action be run
      paths:
      #- "**"
-     - "${{env.HALLO/**}}"     # define the concrete paths on which a change triggers this action, e.g. backend/**
+     - "src/**"     # define the concrete paths on which a change triggers this action, e.g. backend/**
   pull_request: # trigger this action also on Pull Requests
     types: [ opened, reopened ]
      
