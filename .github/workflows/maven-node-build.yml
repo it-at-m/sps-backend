@@ -11,15 +11,17 @@ env:
      # github.repository as <account>/<repo>
      IMAGE_NAME: ${{ github.repository }}
      HALLO:  "src/**"
+     HALLO1: "abc"
 
   
 on: # defining on which triggers this action should run
   push:
      branches:
+      - ${{ env.HALLO1 }}
       # define on push of which branches should this action be run
-     paths:
+   #  paths:
      #- "**"
-     - "{{ env.HALLO }}"     # define the concrete paths on which a change triggers this action, e.g. backend/**
+    # - "{{ env.HALLO }}"     # define the concrete paths on which a change triggers this action, e.g. backend/**
   pull_request: # trigger this action also on Pull Requests
     types: [ opened, reopened ]
      
