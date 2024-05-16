@@ -95,15 +95,21 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: dev
+    env: 
+      SRC_TAG: latest
+      DEST_TAG: dev
     steps:
        - name: tag Image
          run: |
-              skopeo copy --src-creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} --dest-creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} docker://${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} docker://${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:dev
+              skopeo copy --src-creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} --dest-creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} docker://${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.SRC_TAG }} docker://${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEST_TAG }}
   test:
     needs: dev
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: test
+    env: 
+      SRC_TAG: dev
+      DEST_TAG: test
     steps:
        - name: tag Image
          run: |
@@ -113,8 +119,11 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: prod
+    env: 
+      SRC_TAG: test
+      DEST_TAG: prod
     steps:
        - name: tag Image
          run: |
-              skopeo copy --src-creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} --dest-creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} docker://${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test docker://${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:prod
+              skopeo copy --src-creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} --dest-creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} docker://${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:dev docker://${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test
                             
