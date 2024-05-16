@@ -1,0 +1,34 @@
+name: tag-image
+on:
+  workflow_dispatch:
+    inputs:
+      sourceTag:
+        type: choice
+        required: true
+        description: "Source Tag"
+        options: 
+        - latest
+        - dev
+        - test
+        - prod
+      destTag:
+        type: choice
+        required: true
+        description: Dest Tag"
+        options: 
+        - latest
+        - dev
+        - test
+        - prod
+      environment:
+        type: environment
+
+jobs:
+  dev:
+
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+       - name: tag Image
+         run: |
+              skopeo copy --src-creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} --dest-creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} docker://${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.sourceTag }} docker://${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.destTag }} 
