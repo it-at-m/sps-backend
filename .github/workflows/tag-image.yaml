@@ -23,8 +23,14 @@ on:
       environment:
         type: environment
 
+env:
+
+     REGISTRY: ghcr.io
+     # github.repository as <account>/<repo>
+     IMAGE_NAME: ${{ github.repository }}
+
 jobs:
-  dev:
+  tagging:
 
     runs-on: ubuntu-latest
     environment: :${{ github.event.inputs.environment }}
