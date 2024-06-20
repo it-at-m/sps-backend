@@ -33,6 +33,9 @@ jobs:
         run: |
            git config --global user.email "github-actions@github.com"
            git config --global user.name "GitHub Actions"
+           MVN_ARTIFACT_ID=$(mvn  org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.artifactId -q -DforceStdout)
+           echo $MVN_ARTIFACT_ID
+           echo "MVN_ARTIFACT_ID=$MVN_ARTIFACT_ID" >> $GITHUB_ENV
            mvn release:prepare  -B  -Dpassword=${GITLAB_ACCESS_TOKEN_PW}  -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
         env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
@@ -40,7 +43,7 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: wls-common/${{ github.event.inputs.releaseVersion }}
+          tag_name: $MVN_ARTIFACT_ID/${{ github.event.inputs.releaseVersion }}
           draft: false
           prerelease: false
           generate_release_notes: false
