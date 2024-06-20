@@ -43,7 +43,7 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{env.MVN_ARTIFACT_ID}}/${{ github.event.inputs.releaseVersion }}
+          tag_name: ${{env.MVN_ARTIFACT_ID}}-${{ github.event.inputs.releaseVersion }}
           draft: false
           prerelease: false
           generate_release_notes: false
