@@ -36,3 +36,11 @@ jobs:
            mvn release:prepare  -B  -Dpassword=${GITLAB_ACCESS_TOKEN_PW}  -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
         env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: wls-common/${{ github.event.inputs.releaseVersion }}
+          draft: false
+          prerelease: false
+          generate_release_notes: false
