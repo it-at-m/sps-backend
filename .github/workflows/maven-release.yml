@@ -37,6 +37,7 @@ jobs:
            echo $MVN_ARTIFACT_ID
            echo "MVN_ARTIFACT_ID=$MVN_ARTIFACT_ID" >> $GITHUB_ENV
            mvn release:prepare  -B  -Dpassword=${GITLAB_ACCESS_TOKEN_PW}  -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
+           mvn release:perform -Darguments="-Dmaven.deploy.skip=true"
         env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
       - name: Create GitHub Release
