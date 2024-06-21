@@ -79,7 +79,7 @@ jobs:
         with:
           context:  .${{ env.APP_PATH }}
           push: true
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}${{ env.APP_PATH }}:${{needs.release.outputs.MVN_ARTIFACT_ID}} 
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}${{ env.APP_PATH }}:${{ github.event.inputs.releaseVersion }}
            
   create-github-release:
      needs: release
@@ -89,7 +89,7 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{env.MVN_ARTIFACT_ID}}-${{ github.event.inputs.releaseVersion }}
+          tag_name: ${{needs.release.outputs.MVN_ARTIFACT_ID}}-${{ github.event.inputs.releaseVersion }}
           draft: false
           prerelease: false
           generate_release_notes: false
