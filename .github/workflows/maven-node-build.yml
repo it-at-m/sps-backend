@@ -102,6 +102,7 @@ jobs:
           context: .
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          labels: ${{ steps.meta.outputs.labels }}
   dev:
     needs: build-image
     if: github.ref == 'refs/heads/main'
