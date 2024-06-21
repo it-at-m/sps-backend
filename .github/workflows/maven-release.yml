@@ -1,6 +1,7 @@
 name: maven-release
 env:
      APP_PATH: ""
+     REGISTRY: ghcr.io
      
 on:
   workflow_dispatch:
