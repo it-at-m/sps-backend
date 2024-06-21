@@ -73,13 +73,16 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ github.repository }}${{ env.APP_PATH }}
+          images: ${{ env.REGISTRY }}/${{ github.repository }}${{ github.event.inputs.APP_PATH }}:${{ github.event.inputs.releaseVersion }}
+          tags: |
+            type=semver,pattern={{version}},value=${{ github.event.inputs.releaseVersion }}
       - name: Build and push image
         uses: docker/build-push-action@v4
         with:
           context:  .${{ env.APP_PATH }}
           push: true
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}${{ env.APP_PATH }}:${{ github.event.inputs.releaseVersion }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
            
   create-github-release:
      needs: release
