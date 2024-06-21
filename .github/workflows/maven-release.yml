@@ -42,7 +42,7 @@ jobs:
            MVN_ARTIFACT_ID=$(mvn  org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.artifactId -q -DforceStdout)
            echo $MVN_ARTIFACT_ID
            echo "MVN_ARTIFACT_ID=$MVN_ARTIFACT_ID" >> $GITHUB_OUTPUT
-           mvn release:prepare  -B  -Dpassword=${GITLAB_ACCESS_TOKEN_PW}  -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
+           mvn release:prepare  -B  -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
            mvn release:perform -Darguments="-Dmaven.deploy.skip=true"
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v4
