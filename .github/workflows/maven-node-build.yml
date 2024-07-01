@@ -95,6 +95,8 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
             type=sha    
+          labels: |
+                 org.opencontainers.image.description=Another description
 
       - name: Build and push image
         uses: docker/build-push-action@v4
