@@ -96,7 +96,7 @@ jobs:
             type=semver,pattern={{major}}
             type=sha    
           labels: |
-                 org.opencontainers.image.description=Siehe ${{ github.GITHUB_SERVER_URL }}/${{ github.GITHUB_REPOSITORY }}
+                 org.opencontainers.image.description=Siehe ${{ github.server_url }}/${{ github.repository }}
 
       - name: Build and push image
         uses: docker/build-push-action@v4
