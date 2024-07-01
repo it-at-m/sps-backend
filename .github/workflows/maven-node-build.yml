@@ -65,7 +65,6 @@ jobs:
          path: "**/target"
          retention-days: 5    
   build-image:
-      abc:
         uses: it-at-m/.github/.github/workflows/reuseable-template-build-image.yml@reuseable-workflow
         with: 
           registry: ${{ env.REGISTRY }}
