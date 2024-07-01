@@ -11,7 +11,6 @@ env:
      # github.repository as <account>/<repo>
      IMAGE_NAME: ${{ github.repository }}
 
-  
 on: # defining on which triggers this action should run
   push:
     branches:
