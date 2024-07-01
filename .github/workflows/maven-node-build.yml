@@ -64,6 +64,7 @@ jobs:
          path: "**/target"
          retention-days: 5    
   build-image:
+        needs: build-maven
         uses: it-at-m/.github/.github/workflows/reuseable-template-build-image.yml@reuseable-workflow
         with: 
           registry:  ghcr.io # ${{ env.REGISTRY }}
