@@ -67,6 +67,8 @@ jobs:
         uses: it-at-m/.github/.github/workflows/reuseable-template-build-image.yml@reuseable-workflow
         with: 
           registry:  ghcr.io # ${{ env.REGISTRY }}
-          registry-password: ${{ secrets.GITHUB_TOKEN }}
+         # registry-password: ${{ secrets.GITHUB_TOKEN }}
           registry-username: ${{ github.actor }}
           app-path: "" # ${{ env.APP_PATH }}
+        secrets:
+           registry-password: ${{ secrets.GITHUB_TOKEN }}
