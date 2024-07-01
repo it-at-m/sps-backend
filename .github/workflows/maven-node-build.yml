@@ -1,6 +1,5 @@
 name: Compliance check and build test
 
-
 env:
      JAVA_VERSION: 17
      ENABLE_NODE: false
