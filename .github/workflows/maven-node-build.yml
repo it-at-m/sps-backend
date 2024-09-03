@@ -64,7 +64,7 @@ jobs:
          retention-days: 5    
   build-image:
         needs: build-maven
-        uses: it-at-m/.github/.github/workflows/reuseable-template-build-image.yml@reuseable-workflow
+        uses: it-at-m/.github/.github/workflows/reuseable-template-build-image.yml@main
         with: 
           registry:  ghcr.io # ${{ env.REGISTRY }}
          # registry-password: ${{ secrets.GITHUB_TOKEN }}
