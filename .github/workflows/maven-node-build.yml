@@ -1,74 +1,33 @@
-name: Compliance check and build test
+name: build all
 
-env:
-     JAVA_VERSION: 17
-     ENABLE_NODE: false
-     NODE_VERSION: 20
-     APP_PATH: "." # example ./backend for monorepos
-     TZ: Europe/Berlin # timezone
-       # Use docker.io for Docker Hub if empty
-     REGISTRY: ghcr.io
-     # github.repository as <account>/<repo>
-     IMAGE_NAME: ${{ github.repository }}
-
-on: # defining on which triggers this action should run
-  push:
-    branches:
-      # define on push of which branches should this action be run
-    paths:
-     - "**"     # define the concrete paths on which a change triggers this action, e.g. backend/**
-  pull_request: # trigger this action also on Pull Requests
-    types: [ opened, reopened ]
-     
+on: [push]
 jobs:
-  compliance:
+  build:
     runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Advance Security Policy as Code
-        uses: advanced-security/policy-as-code@v2.7.1
-        with:
-          policy: it-at-m/policy-as-code
-          policy-path: default.yaml
-          token: ${{ secrets.GITHUB_TOKEN }}
-          argvs: "--disable-dependabot --disable-secret-scanning --disable-code-scanning --display"
-
-  build-maven:
-    needs: compliance
-    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/Berlin # timezone
+    strategy:
+      matrix:
+        include: # hier müssen die Pfade angegeben werden
+          - app-path: "."
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 
-        uses: actions/setup-java@v4
+      - if:  ${{hashFiles(format('./{0}/package.json', matrix.app-path))!=null}} 
+        id: node
+        uses: it-at-m/.github/.github/actions/action-npm-build@main
         with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: "temurin"
-          cache: "maven"
-      - name: Set up Node.js
-        if: ${{ env.ENABLE_NODE == 'true' }}
-        uses: actions/setup-node@v4
+          app-path:  "${{ matrix.app-path }}"
+      - if:  ${{hashFiles(format('./{0}/pom.xml', matrix.app-path))!=null}} 
+        id: maven
+        uses: it-at-m/.github/.github/actions/action-maven-build@main
         with:
-          node-version:  ${{ env.NODE_VERSION }}
-          cache: "npm"
-          cache-dependency-path: "${{env.APP_PATH}}/**/package-lock.json" 
-      - name: Build with Maven
-        run: mvn --update-snapshots -f ${{env.APP_PATH}}/pom.xml install
-      - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v4
+          app-path: "${{ matrix.app-path }}"
+      - if: github.ref == 'refs/heads/main'
+        uses: it-at-m/.github/.github/actions/action-build-image@main
         with:
-         name: target
-         path: "**/target"
-         retention-days: 5    
-  build-image:
-        needs: build-maven
-        uses: it-at-m/.github/.github/workflows/reuseable-template-build-image.yml@main
-        with: 
-          registry:  ghcr.io # ${{ env.REGISTRY }}
-         # registry-password: ${{ secrets.GITHUB_TOKEN }}
+          path: "${{  matrix.app-path }}"
+          image-name: "${{  matrix.app-path }}"
+          artifact-name: ${{join(steps.*.outputs.artifact-name)}}
+          registry-password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
           registry-username: ${{ github.actor }}
-          app-path: "" # ${{ env.APP_PATH }}
-        secrets:
-           registry-password: ${{ secrets.GITHUB_TOKEN }}
