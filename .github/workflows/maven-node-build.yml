@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         include: # hier müssen die Pfade angegeben werden
-          - app-path: ""
+          - app-path: .
     steps:
       - uses: actions/checkout@v4
       - if:  ${{hashFiles(format('./{0}/package.json', matrix.app-path))!=null}} 
