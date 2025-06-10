@@ -40,7 +40,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: docker pull ghcr.io/it-at-m/sps/sps-backend:0.0.72
 
 
       - name: Build and push image
