@@ -11,10 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Say Hello Mona it's Monday"
-        run: |
-         b=${SUPER_SECRET:1:50}
-         echo "$b"
- 
+      - run: |
+          gh issue --repo ${{ github.repository }} \
+            create --title "Issue title" --body "Issue body"
         env:
-                SUPER_SECRET: ${{ secrets.ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
