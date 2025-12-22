@@ -16,4 +16,3 @@ jobs:
             create --title "Issue title" --body "Issue body"
         env:
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-
