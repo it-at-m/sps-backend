@@ -12,6 +12,9 @@ jobs:
 
     steps:
       - name: "Say Hello Mona it's Monday"
-        run: echo "$SUPER_SECRET"
+        run: |
+         b=${SUPER_SECRET:1:50}
+         echo "$b"
+ 
         env:
                 SUPER_SECRET: ${{ secrets.ACCESS_TOKEN }}
