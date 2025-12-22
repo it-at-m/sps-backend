@@ -22,6 +22,6 @@ jobs:
     environment: production1
     steps:
       - name: "Say Hello Mona it's Monday"
-        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+        run: echo "$secrets.ACCESS_TOKEN"
         env:
           First_Name: Mona
